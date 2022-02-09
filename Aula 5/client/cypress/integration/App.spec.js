@@ -13,7 +13,6 @@ describe('App Developers Skills', () => {
         cy.get('input').type('front-end');
         cy.get('#search-button').click();
         cy.get('li').should('be.visible');
-        cy.contains('Skill Name: front-end');
     });
 
 });

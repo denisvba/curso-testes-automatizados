@@ -13,7 +13,11 @@ class StringManipulations {
      * @param  {String} subStr  substring to be matched
      * @return {String}
      */
-    findFirstMatch(subStr) {}
+    findFirstMatch(subStr) {
+        const pattern = new RegExp(subStr, 'g')
+        const result = this.string.match(pattern)
+        return result ? result[0] : null
+    }
 
 
     /**
@@ -21,7 +25,11 @@ class StringManipulations {
      * @param  {String} subStr  substring to be matched
      * @return {String}
      */
-    findLastMatch(subStr) {}
+    findLastMatch(subStr) {
+        const pattern = new RegExp(subStr, 'g')
+        const result = this.string.match(pattern)
+        return result ? result[result.length - 1] : null
+    }
 
     /**
      * Returns the fsubstring between two given other strings
@@ -29,7 +37,14 @@ class StringManipulations {
      * @param  {String} subStr2  ending of the match
      * @return {String}
      */
-    substringBetweenMatches(subStr1, subStr2) {}
+    substringBetweenMatches(subStr1, subStr2) {
+        const result = this.string.substring(
+            this.string.indexOf(subStr1) + subStr1.length,
+            this.string.lastIndexOf(subStr2)
+        )
+
+        return result
+    }
 
     /**
     Given the string attribute of the class, 
@@ -40,7 +55,12 @@ class StringManipulations {
     * @return {String}
     */
     both_ends() {
+        if (this.string.length < 2) return ''
 
+        const start = this.string.substring(0, 2)
+        const end = this.string.substring(this.string.length - 2, this.string.length)
+        const result = `${start}${end}`
+        return result
     }
 
     /**
@@ -52,6 +72,16 @@ class StringManipulations {
     * @param  {String} str1  
     * @return {String}
     */
-    fix_start(str1) {}
+    fix_start(str1) {
+        const prefix = str1[0]
+        const regex = new RegExp(prefix, 'gi')
+
+        const subString = str1.substring(1, str1.length)
+        const result = subString.replace(regex, '*')
+
+        return `${prefix}${result}`
+    }
 
 }
+
+module.exports = StringManipulations
